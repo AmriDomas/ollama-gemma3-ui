@@ -1,0 +1,48 @@
+# .gitignore
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Streamlit
+.streamlit/
+*.log
+
+# Data files
+*.csv
+*.json
+*.pkl
+*.pickle
+*.db
+*.sqlite3
+*.pdf
+*.docx
+*.xlsx
+*.mp3
+*.wav
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+tmp/
+temp/
+uploads/
+chroma_db/
+data/

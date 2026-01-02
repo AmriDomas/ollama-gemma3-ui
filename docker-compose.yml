@@ -1,0 +1,39 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  streamlit:
+    build: .
+    container_name: gemma3-ui
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+      - ./chroma_db:/app/chroma_db
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
